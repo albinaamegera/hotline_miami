@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3638996b4a0f84c4495f356b87f1b985, type: 3}
-  m_Name: player config
+  m_Script: {fileID: 11500000, guid: a6fe87425d84f7344b005a2b9665fb07, type: 3}
+  m_Name: one hand
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  defaultWeapon: {fileID: 11400000, guid: 420855ea74daec7429b2243c264f674d, type: 2}

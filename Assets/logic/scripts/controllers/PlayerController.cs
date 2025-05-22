@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour, ICharacterController
     {
         _moveController = new(this, _config.movementSpeed);
         _lookController = new(this);
-        _attackController = new(this);
+        _attackController = new(this, _config.defaultWeapon);
     }
     #region input handling
     private void HandleAxis(InputAction.CallbackContext context)

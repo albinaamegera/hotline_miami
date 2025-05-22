@@ -3,4 +3,5 @@ using UnityEngine;
 public class CharacterConfig : ScriptableObject
 {
     public float movementSpeed;
+    public Weapon defaultWeapon;
 }
