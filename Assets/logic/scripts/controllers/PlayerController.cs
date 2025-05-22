@@ -10,16 +10,19 @@ public class PlayerController : MonoBehaviour, ICharacterController
     [Header("input")]
     [SerializeField] private InputAction _movement;
     [SerializeField] private InputAction _rotation;
+    [SerializeField] private InputAction _attack;
 
     [Header("settings")]
     [SerializeField] private CharacterConfig _config;
 
     private CharacterMovementController _moveController;
     private CharacterRotationController _lookController;
+    private CharacterAttackController _attackController;
 
     private Vector2 _moveDirection;
     private Vector2 _lookDirection;
     private bool _isMovementInput;
+    private bool _isAttackInput;
     private void Awake()
     {
         EnableInput();
@@ -31,6 +34,10 @@ public class PlayerController : MonoBehaviour, ICharacterController
         {
             _moveController.Move();
         }
+        if (_isAttackInput)
+        {
+            _attackController.Attack();
+        }
         _lookController.Look();
     }
     private void OnDestroy()
@@ -41,13 +48,14 @@ public class PlayerController : MonoBehaviour, ICharacterController
     {
         _moveController = new(this, _config.movementSpeed);
         _lookController = new(this);
+        _attackController = new(this);
     }
     #region input handling
     private void HandleAxis(InputAction.CallbackContext context)
     {
         _moveDirection = context.ReadValue<Vector2>();
     }
-    private void HandleNovementInput(InputAction.CallbackContext context)
+    private void HandleMovementInput(InputAction.CallbackContext context)
     {
         _isMovementInput = context.phase == InputActionPhase.Started ? true : false;
     }
@@ -55,21 +63,31 @@ public class PlayerController : MonoBehaviour, ICharacterController
     {
         _lookDirection = context.ReadValue<Vector2>().ToWorldPoints();
     }
+    private void HandleAttackInput(InputAction.CallbackContext context)
+    {
+        _isAttackInput = context.phase == InputActionPhase.Started ? true : false;
+    }
     private void EnableInput()
     {
         _movement.Enable();
         _rotation.Enable();
+        _attack.Enable();
         _movement.performed += HandleAxis;
-        _movement.started += HandleNovementInput;
-        _movement.canceled += HandleNovementInput;
+        _movement.started += HandleMovementInput;
+        _movement.canceled += HandleMovementInput;
         _rotation.performed += HandleMousePosition;
+        _attack.started += HandleAttackInput;
+        _attack.canceled += HandleAttackInput;
     }
     private void DisableInput()
     {
+        _attack.started -= HandleAttackInput;
+        _attack.canceled -= HandleAttackInput;
         _rotation.performed -= HandleMousePosition;
         _movement.performed -= HandleAxis;
-        _movement.started -= HandleNovementInput;
-        _movement.canceled -= HandleNovementInput;
+        _movement.started -= HandleMovementInput;
+        _movement.canceled -= HandleMovementInput;
+        _attack.Disable();
         _rotation.Disable();
         _movement.Disable();
     }

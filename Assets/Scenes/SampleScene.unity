@@ -924,6 +924,23 @@ MonoBehaviour:
       m_Action: Rotation
       m_Flags: 0
     m_Flags: 0
+  _attack:
+    m_Name: Attack
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: e83cab24-4f5b-42f8-b7f5-8ed1d89ce1c1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: cf2982c3-6496-4792-b099-dff7426c205e
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack
+      m_Flags: 0
+    m_Flags: 0
   _config: {fileID: 11400000, guid: 2b6d2b6b2dafa1c4e9914e3ad35076db, type: 2}
 --- !u!4 &1407725593
 Transform:
@@ -1156,6 +1173,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1407725593}
-  - {fileID: 1557794273}
   - {fileID: 291171633}
+  - {fileID: 1557794273}
+  - {fileID: 1407725593}
